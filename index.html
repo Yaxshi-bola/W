@@ -204,7 +204,7 @@
                         <div id="progressBarFill" class="h-full bg-slate-700 dark:bg-slate-200 rounded-full transition-all duration-500" style="width: 0%"></div>
                     </div>
                     <div class="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 font-bold mt-2.5">
-                        <span id="answeredRatioText">Bajarildi: 0 / 51</span>
+                        <span id="answeredRatioText">Bajarildi: 0 / 100</span>
                         <span id="bookmarkCountText">Saqlanganlar: 0</span>
                     </div>
                 </div>
@@ -242,10 +242,10 @@
                 <div>
                     <label class="block text-[9px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Mavzular filtri:</label>
                     <select id="categoryFilter" onchange="filterQuestions()" class="w-full bg-white/50 dark:bg-slate-900/40 border border-white/35 dark:border-slate-800/40 rounded-xl p-2.5 text-xs font-extrabold focus:outline-none focus:ring-1 focus:ring-indigo-400 text-slate-700 dark:text-slate-300">
-                        <option value="all">Barcha mavzular (51 ta savol)</option>
-                        <option value="imlo">Orfografiya va Imlo (15 ta)</option>
-                        <option value="hujjat">Rasmiy ish yuritish va Hujjatlar (24 ta)</option>
-                        <option value="uslub">Vazifaviy uslublar (12 ta)</option>
+                        <option value="all">Barcha mavzular (100 ta savol)</option>
+                        <option value="imlo">Orfografiya va Imlo (29 ta)</option>
+                        <option value="hujjat">Rasmiy ish yuritish va Hujjatlar (54 ta)</option>
+                        <option value="uslub">Vazifaviy uslublar (17 ta)</option>
                         <option value="bookmarked">Saralangan savollar (★)</option>
                     </select>
                 </div>
@@ -276,7 +276,7 @@
             <div class="glass-panel rounded-3xl p-5 transition-all duration-300 flex flex-col flex-1 min-h-[220px] lg:max-h-[350px]">
                 <h2 class="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3 flex items-center justify-between">
                     <span>Savollar xaritasi</span>
-                    <span id="filteredCountBadge" class="text-[10px] bg-slate-200 dark:bg-slate-800 px-2.5 py-0.5 rounded-full font-black text-slate-600 dark:text-slate-300">51/51</span>
+                    <span id="filteredCountBadge" class="text-[10px] bg-slate-200 dark:bg-slate-800 px-2.5 py-0.5 rounded-full font-black text-slate-600 dark:text-slate-300">100/100</span>
                 </h2>
                 
                 <div id="questionsMapContainer" class="grid grid-cols-5 sm:grid-cols-10 lg:grid-cols-5 gap-1.5 overflow-y-auto flex-1 pr-1 custom-scrollbar">
@@ -447,7 +447,7 @@
         </div>
     </div>
 
-    <!-- CORE JAVASCRIPT DATABASE (Full 51 items from provided text) -->
+    <!-- CORE JAVASCRIPT DATABASE (Full 100 items from standard hujjatchilik and imlo) -->
     <script>
         const rawQuestionsData = [
             {
@@ -740,7 +740,7 @@
                     "Mumtoz adabiyotning eng sara unsurlarini qo'llash",
                     "Poytaxt shevasi unsurlarini qo'llash"
                 ],
-                explain: "Adabiy til normasi — tildagi barcha sheva va guruhlar ustidan turuvchi, jamiyat tomonidan rasman qabul qilingan imlo, talaffuz va grammatik qoliplardir.",
+                explain: "Adabiy til normao — tildagi barcha sheva va guruhlar ustidan turuvchi, jamiyat tomonidan rasman qabul qilingan imlo, talaffuz va grammatik qoliplardir.",
                 cat: "uslub"
             },
             {
@@ -926,6 +926,503 @@
                 answer: "qo'shtirnoq, qavs",
                 options: ["qo'shtirnoq, qavs", "ikki nuqta, ko'p nuqta", "so'roq, undov", "nuqta, vergul"],
                 explain: "Qo'shtirnoq (\"\") va qavslar (()) gapda har doim ochiluvchi va yopiluvchi juft shaklida kelgani sababli ikki elementli deyiladi.",
+                cat: "imlo"
+            },
+            {
+                id: 52,
+                q: "Bayonnoma (protokol) nechta asosiy zaruriy qismdan iborat?",
+                answer: "3 ta (eshitildi, so'zga chiqildi, qaror qilindi)",
+                options: [
+                    "3 ta (eshitildi, so'zga chiqildi, qaror qilindi)",
+                    "2 ta (kirish, xulosa)",
+                    "4 ta (muqaddima, asos, qismlar, imzo)",
+                    "5 ta (barcha ma'lumotlar kiritilgan)"
+                ],
+                explain: "Yig'ilish bayonnomasining (protokol) har bir ko'riladigan masalasi bo'yicha 'ESHITILDI', 'SO'ZGA CHIQILDI' va 'QAROR QILINDI' kabi uchta asosiy tarkibiy qism kiritiladi.",
+                cat: "hujjat"
+            },
+            {
+                id: 53,
+                q: "Hujjatlar tayyorlanish xususiyatiga ko'ra qanday turlarga bo'linadi?",
+                answer: "qoralama, asl nusxa, nusxa, ikkinchi nusxa, ko'chirma",
+                options: [
+                    "qoralama, asl nusxa, nusxa, ikkinchi nusxa, ko'chirma",
+                    "ichki va tashqi hujjatlar",
+                    "rasmiy va shaxsiy hujjatlar",
+                    "sodda va murakkab hujjatlar"
+                ],
+                explain: "Hujjatchilik standartiga ko'ra tayyorlanish bosqichi va xususiyatiga qarab qoralama, asl nusxa, nusxa, ikkinchi nusxa (dublikat) hamda ko'chirmalar farqlanadi.",
+                cat: "hujjat"
+            },
+            {
+                id: 54,
+                q: "Hujjatlar tayyorlanish o'rniga ko'ra (tuzilish joyiga ko'ra) qanday bo'ladi?",
+                answer: "Ichki va tashqi",
+                options: ["Ichki va tashqi", "Sodda va murakkab", "Rasmiy va shaxsiy", "Xizmat va xususiy"],
+                explain: "Tashkilotning o'z doirasida yaratilib, shu yerda foydalaniladigan hujjatlar - ichki, boshqa joydan keladiganlari esa tashqi hujjat deyiladi.",
+                cat: "hujjat"
+            },
+            {
+                id: 55,
+                q: "Tashkiliy hujjatlar turiga qaysilar kiradi?",
+                answer: "Guvohnoma, yo'riqnoma, nizom, ustav, shartnoma",
+                options: [
+                    "Guvohnoma, yo'riqnoma, nizom, ustav, shartnoma",
+                    "Buyruq, buyruqdan ko'chirma, farmoyish",
+                    "Ariza, bayonnoma, bildirishnoma, dalolatnoma",
+                    "Telegramma, telefonogramma, rasmiy xat"
+                ],
+                explain: "Korxona tuzilishi va faoliyat tartibini belgilovchi ustav, nizom, yo'riqnomalar va tashkiliy asosdagi guvohnoma hamda shartnomalar tashkiliy hujjatlardir.",
+                cat: "hujjat"
+            },
+            {
+                id: 56,
+                q: "Hujjatlar matniga qo'yiladigan eng muhim me'yoriy talablar qaysi javobda to'g'ri ko'rsatilgan?",
+                answer: "Barcha javoblar to'g'ri",
+                options: [
+                    "Barcha javoblar to'g'ri",
+                    "Aniqlik, ixchamlik, lo'ndalik va mazmuniy to'liqlik",
+                    "Hujjat matni qisqa, ravon, ortiqcha hissiy so'zlarsiz bayon qilinishi",
+                    "Hujjatda bayon qilingan axborot xolis bo'lishi"
+                ],
+                explain: "Idoraviy ish yuritish uslubida yozilgan har qanday hujjatdan xolislik, lo'ndalik, aniqlik va mazmuniy tugallik talab etiladi.",
+                cat: "uslub"
+            },
+            {
+                id: 57,
+                q: "Dalolatnoma (akt) nechta zaruriy qismdan (rekvizitdan) tarkib topadi?",
+                answer: "11 ta",
+                options: ["11 ta", "9 ta", "12 ta", "7 ta"],
+                explain: "Dalolatnomaning (akt) rasmiy andozasiga ko'ra unda sarlavha, tuzilgan sana, ro'yxat raqami, tuzilgan joy, asos, ishtirokchilar tarkibi, matn va imzolar kabi 11 ta muhim zaruriy rekvizit bo'ladi.",
+                cat: "hujjat"
+            },
+            {
+                id: 58,
+                q: "Ish qog'ozlarida biror shaxs yoki tashkilotga murojaat qilinganda 'Siz' olmoshi va uning kelishik shakllari qanday yoziladi?",
+                answer: "Bosh harf bilan yoziladi",
+                options: ["Bosh harf bilan yoziladi", "Kichik harf bilan yoziladi", "Qalin harf bilan ajratib yoziladi", "Qo'shtirnoq ichiga olib yoziladi"],
+                explain: "Hurmat bildirish maqsadida rasmiy hujjatlar va xizmat yozishmalarida 'Siz', 'Sizga', 'Sizning' olmoshlari bosh harf bilan yoziladi.",
+                cat: "imlo"
+            },
+            {
+                id: 59,
+                q: "Qaysi rasmiy xabarnoma turida so'zlar bo'g'inlab satrdan-satrga ko'chirilmaydi va raqamlar harflar bilan yozilishi mumkin?",
+                answer: "Telegramma",
+                options: ["Telegramma", "Telefonogramma", "Tilxat", "E'lon"],
+                explain: "Telegrammalarda har bir belgi va uzatish tezligi hisobga olinadi. Chalkashliklar oldini olish uchun raqamlar harf bilan ifodalanadi, satr ko'chirilmaydi.",
+                cat: "hujjat"
+            },
+            {
+                id: 60,
+                q: "Rasmiy uslub va hujjatlarda tilning asosan qaysi ikki asosiy vazifasi namoyon bo'ladi?",
+                answer: "Xabar berish va buyurish",
+                options: ["Xabar berish va buyurish", "Tasvirlash va his-tuyg'ularni ifodalash", "Ommaga ta'sir o'tkazish va da'vat etish", "Estetik va emotsional muloqot"],
+                explain: "Hujjatlarda til faqat xabar berish (axborot yetkazish, M: ma'lumotnoma) va buyurish (talab qilish, M: buyruq) vazifalarini bajaradi.",
+                cat: "uslub"
+            },
+            {
+                id: 61,
+                q: "Xodim tomonidan xizmat va intizom qoidalari buzilganda javobgarlikka tortishdan avval olinadigan rasmiy tushuntirish hujjati nima?",
+                answer: "Tushuntirish xati",
+                options: ["Tushuntirish xati", "Ariza", "Ma'lumotnoma", "Bildirishnoma"],
+                explain: "Xodim intizom buzganida mehnat qonunchiligiga asosan undan yozma shaklda rasmiy tushuntirish xati (obyasnitelnaya) talab qilinishi shart.",
+                cat: "hujjat"
+            },
+            {
+                id: 62,
+                q: "Tarjimayi hol (avtobiografiya) qaysi shaxs tilidan bayon qilinadi?",
+                answer: "Birinchi shaxs birlik (men) tilidan",
+                options: ["Birinchi shaxs birlik (men) tilidan", "Uchinchi shaxs birlik (u) tilidan", "Birinchi shaxs ko'plik (biz) tilidan", "Ikkinchi shaxs ko'plik (siz) tilidan"],
+                explain: "Tarjimayi hol fuqaroning shaxsan o'zi tomonidan, hayoti va faoliyati haqida birinchi shaxs nomidan (masalan: 'Men, Karimov Ali...') yoziladi.",
+                cat: "hujjat"
+            },
+            {
+                id: 63,
+                q: "Amalda hech qanday huquqiy kuchga ega bo'lmagan, hujjatning faqat dastlabki xomaki varianti nima deb ataladi?",
+                answer: "Qoralama",
+                options: ["Qoralama", "Asl nusxa", "Nusxa", "Ko'chirma"],
+                explain: "Qoralama - bu hujjat tayyorlovchining dastlabki xomaki matni bo'lib, imzo, muhr yoki tasdiq belgisisiz hech qanday yuridik kuchga ega bo'lmaydi.",
+                cat: "hujjat"
+            },
+            {
+                id: 64,
+                q: "Farmoyish hujjatlari guruhiga quyidagilardan qaysilari kiritiladi?",
+                answer: "Buyruq, ko'rsatma, farmoyish",
+                options: [
+                    "Buyruq, ko'rsatma, farmoyish",
+                    "Nizom, ustav, yo'riqnoma",
+                    "Ariza, tushuntirish xati, tavsifnoma",
+                    "Bayonnoma, hisobot, dalolatnoma"
+                ],
+                explain: "Boshqaruv va yakka rahbarlik asosida tashkilotlarda ijro uchun chiqariladigan buyruq, ko'rsatma hamda farmoyishlar rasmiy farmoyish hujjatlari turkumiga kiradi.",
+                cat: "hujjat"
+            },
+            {
+                id: 65,
+                q: "Ikki yoki undan ortiq tomonlar o'rtasida huquqiy va iqtisodiy munosabatlarni o'rnatish, o'zgartirish yoki tugatish bo'yicha tuziladigan kelishuv hujjati nima?",
+                answer: "Shartnoma",
+                options: ["Shartnoma", "Dalolatnoma", "Yo'riqnoma", "Tilxat"],
+                explain: "O'zaro huquq va majburiyatlarni belgilovchi, ikki tomonlama kelishuv asosida tuziladigan hujjat bu — Shartnoma (bitim, kontrakt) dir.",
+                cat: "hujjat"
+            },
+            {
+                id: 66,
+                q: "Diplomatik yozishmalarda, rasmiy notalarda fikr-mulohazalar odatda nechanchi shaxs tilidan ifodalanadi?",
+                answer: "Uchinchi shaxs",
+                options: ["Uchinchi shaxs", "Birinchi shaxs", "Ikkinchi shaxs", "Farqi yo'q, aralash shaklda"],
+                explain: "Diplomatik aloqalar va rasmiy davlatlararo xatlarda fikr doimo xolis, diplomatik odob doirasida va uchinchi shaxs nomidan bayon etiladi.",
+                cat: "uslub"
+            },
+            {
+                id: 67,
+                q: "Qaysi rasmiy hujjat matni qat'iy qonuniy andozaga ega bo'lmay, xodim tomonidan asosan erkin shaklda yozilishi mumkin?",
+                answer: "Tushuntirish xati",
+                options: ["Tushuntirish xati", "Ariza", "Tilxat", "Ishonchnoma"],
+                explain: "Tushuntirish xatida sodir bo'lgan biron hodisa yoki sabab bayon etilishi sababli, uning matni qoliplanmagan bo'lib, erkin yozma nutqda bayon qilinadi.",
+                cat: "hujjat"
+            },
+            {
+                id: 68,
+                q: "Hujjatlarda pul yoki moddiy qiymatdorlik hisobi raqamda ko'rsatilgandan keyin qanday talab qo'yiladi?",
+                answer: "Raqamdan so'ng darhol qavs ichida uning so'zdagi ifodasi yoziladi",
+                options: [
+                    "Raqamdan so'ng darhol qavs ichida uning so'zdagi ifodasi yoziladi",
+                    "Raqam qizil rang bilan belgilanadi",
+                    "Tagiga to'lqinli chiziq chizib qo'yiladi",
+                    "Faqat so'z bilan yozilishi kifoya"
+                ],
+                explain: "Moliyaviy xavfsizlik va hujjatlarning soxtalashtirilishining oldini olish uchun pul hisobi raqamdan keyin qavs ichida harflar bilan yozilishi majburiydir.",
+                cat: "hujjat"
+            },
+            {
+                id: 69,
+                q: "Qaysi rasmiy hujjatda 'ESHITILDI', 'SO'ZGA CHIQILDI', 'QAROR QILINDI' kabi bo'limlar majburiy tartibda qo'llaniladi?",
+                answer: "Bayonnoma",
+                options: ["Bayonnoma", "Dalolatnoma", "Hisobot", "Farmoyish"],
+                explain: "Majlis va yig'ilishlarning borishini aks ettiruvchi Bayonnomalarda (protokol) kun tartibidagi masalalar tahlili yuqoridagi uchta bo'limga bo'lib ko'rsatiladi.",
+                cat: "hujjat"
+            },
+            {
+                id: 70,
+                q: "Namangan viloyatining Mug' qal'asidan (Mug' tog'i) nechanchi asrlarga oid eng qadimiy so'g'diy hujjatchilik namunalari topilgan?",
+                answer: "VII-VIII asrlar",
+                options: ["VII-VIII asrlar", "IX-X asrlar", "XI-XII asrlar", "V-VI asrlar"],
+                explain: "Mug' tog'idan topilgan arxiv materiallari yurtimiz hududida hujjatchilik madaniyati VII-VIII asrlardayoq tizimli ravishda mavjud bo'lganini isbotlaydi.",
+                cat: "hujjat"
+            },
+            {
+                id: 71,
+                q: "Amaldagi 'Davlat tili to'g'risida'gi Qonunning qaysi moddasida korxonalar va tashkilotlarda ish yuritish davlat tilida yuritilishi belgilangan?",
+                answer: "10-moddasida",
+                options: ["10-moddasida", "1-moddasida", "7-moddasida", "24-moddasida"],
+                explain: "Qonunning 10-moddasida korxonalar, muassasalar va tashkilotlarda ish yuritish, moliya va statistika hujjatlari davlat tilida yuritilishi mustahkamlab qo'yilgan.",
+                cat: "hujjat"
+            },
+            {
+                id: 72,
+                q: "Amaldagi o'zbek tili 'Davlat tili to'g'risida'gi Qonuni jami nechta moddadan iborat?",
+                answer: "24 ta modda",
+                options: ["24 ta modda", "30 ta modda", "28 ta modda", "18 ta modda"],
+                explain: "Amaldagi yangi tahrirdagi 'Davlat tili to'g'risida'gi Qonun 24 ta moddadan iborat qilib belgilangan.",
+                cat: "hujjat"
+            },
+            {
+                id: 73,
+                q: "Quyidagilardan qaysilari tashqi iqtisodiy faoliyat doirasidagi yozishmalar yoki tijorat hujjatlari hisoblanadi?",
+                answer: "Tijorat xatlari va bitimlar",
+                options: [
+                    "Tijorat xatlari va bitimlar",
+                    "Tashkiliy buyruqlar",
+                    "Shaxsiy arizalar",
+                    "Ichki dalolatnomalar"
+                ],
+                explain: "Tovarlar ayirboshlash, sheriklik kelishuvlari va iqtisodiy takliflarni o'z ichiga olgan xalqaro va ichki yozishmalar tijorat hujjatlari sanaladi.",
+                cat: "hujjat"
+            },
+            {
+                id: 74,
+                q: "Tashkilotlarda arxiv uchun yig'majildlar (nomenklatura) ro'yxati qanday muddatda rasmiylashtiriladi?",
+                answer: "Har yili",
+                options: ["Har yili", "Har 3 yilda", "Har 5 yilda", "Har oy yakunida"],
+                explain: "Hujjatlar nomenklaturasi va ularni saqlash ro'yxatlari arxiv me'yorlariga muvofiq har yili yangilanadi va tasdiqlanadi.",
+                cat: "hujjat"
+            },
+            {
+                id: 75,
+                q: "Ko'p takrorlanadigan bir xil andozadagi rasmiy voqea-hodisalar uchun oldindan maxsus tayyorlab qo'yilgan andozali hujjatlar qanday nomlanadi?",
+                answer: "Qolipli hujjatlar",
+                options: ["Qolipli hujjatlar", "Erkin hujjatlar", "Murakkab hujjatlar", "Tashkiliy hujjatlar"],
+                explain: "Ko'p marta bir xil shaklda takrorlanadigan masalalar bo'yicha tayyorlangan shablonlar (M: ma'lumotnoma blanklari, anketalar) qolipli hujjatlar deb yuritiladi.",
+                cat: "hujjat"
+            },
+            {
+                id: 76,
+                q: "Xizmat guvohnomasi qaysi holatda yaroqsiz deb hisoblanadi va belgilangan tartibda yo'q qilinadi?",
+                answer: "Amal qilish muddati tugaganda yoki xodim ishdan bo'shaganda",
+                options: [
+                    "Amal qilish muddati tugaganda yoki xodim ishdan bo'shaganda",
+                    "Xodim xizmat safariga ketganda",
+                    "Guvohnoma biroz kirlanganda",
+                    "Tashkilot rahbariyati o'zgarganda"
+                ],
+                explain: "Xizmat guvohnomasi xodimning vakolatini tasdiqlaydi. Muddat tugaganda yoki xodim ishdan ketganida u bekor qilinishi shart.",
+                cat: "hujjat"
+            },
+            {
+                id: 77,
+                q: "Quyidagi so'zlardan qaysi birida 'h' va 'x' harflarining yozilishi imlo qoidalariga mutloq javob beradi?",
+                answer: "hushyor, xushchaqchaq",
+                options: ["hushyor, xushchaqchaq", "xushyor, hushchaqchaq", "hushyor, hushchaqchaq", "xushyor, xushchaqchaq"],
+                explain: "'Hush' (ong, aqlli) so'zi bo'g'iz undoshi 'h' bilan, 'xush' (yoqimli, yaxshi) so'zi esa chuqur til orqa 'x' bilan yoziladi.",
+                cat: "imlo"
+            },
+            {
+                id: 78,
+                q: "Rasmiy hujjatlarda muhr (pechat) qanday bosilishi kerak?",
+                answer: "Muhr imzoning bir qismini va lavozim nomini qamrab olib, aniq ko'rinishi lozim",
+                options: [
+                    "Muhr imzoning bir qismini va lavozim nomini qamrab olib, aniq ko'rinishi lozim",
+                    "Muhr imzodan mutloq uzoqda, bo'sh joyga bosilishi shart",
+                    "Muhr faqat sananing ustiga bosiladi",
+                    "Muhr bosilganda imzo umuman ko'rinmasligi kerak"
+                ],
+                explain: "Yuridik talablarga ko'ra, muhr o'zga shaxs tomonidan soxtalashtirilishining oldini olish uchun imzo va lavozim nomining bir qismi ustiga tushishi lozim.",
+                cat: "hujjat"
+            },
+            {
+                id: 79,
+                q: "Qaysi so'zga egalik qo'shimchasi qo'shilganda asosdagi 'k' tovushi 'g' tovushiga aylanadi (tovush almashishi)?",
+                answer: "yurak (yuragim)",
+                options: ["yurak (yuragim)", "daftar (daftarim)", "kitob (kitobim)", "qalam (qalamim)"],
+                explain: "O'zbek tili fonetika me'yoriga ko'ra, ko'p bo'g'izli 'k' bilan tugagan so'zlarga unli qo'shimcha qo'shilganda 'k' tovushi 'g'ga aylanadi.",
+                cat: "imlo"
+            },
+            {
+                id: 80,
+                q: "O'zbek tili imlo qoidalariga asosan, qaysi so'z shakli har doim ajratib yoziladi?",
+                answer: "to'g'ri kelmoq",
+                options: ["to'g'ri kelmoq", "guldasta", "termoyadro", "bugun"],
+                explain: "Ko'makchi felli so'z birikmalari (harakat va yordamchi fe'llar, M: to'g'ri kelmoq, olib bormoq) ajratib yozilishi shart.",
+                cat: "imlo"
+            },
+            {
+                id: 81,
+                q: "Quyidagi gaplardan qaysi birida tinish belgilari to'liq va to'g'ri qo'llanilgan?",
+                answer: "Otabek aytdi: \"Men ertaga kelaman\".",
+                options: [
+                    "Otabek aytdi: \"Men ertaga kelaman\".",
+                    "Otabek aytdi - Men ertaga kelaman.",
+                    "Otabek aytdi, \"Men ertaga kelaman\".",
+                    "Otabek, aytdi: \"men ertaga kelaman\""
+                ],
+                explain: "Muallif gapidan so'ng kelgan ko'chirma gap qo'shtirnoq ichida, bosh harf bilan boshlanadi va muallif gapidan keyin ikki nuqta qo'yiladi.",
+                cat: "imlo"
+            },
+            {
+                id: 82,
+                q: "Ushbu so'zlardan qaysi birining imlosida xatolikka yo'l qo'yilmagan?",
+                answer: "targ'ibot",
+                options: ["targ'ibot", "targibot", "tarhibot", "tahribot"],
+                explain: "Arabchadan olingan 'targ'ibot' so'zi til orqa 'g'' tovushi hamda oddiy 'b' bilan yoziladi.",
+                cat: "imlo"
+            },
+            {
+                id: 83,
+                q: "Qaysi turdagi qo'shma so'zlar har doim chiziqcha (defis) bilan yozilishi lozim?",
+                answer: "Juft va takroriy so'zlar",
+                options: [
+                    "Juft va takroriy so'zlar",
+                    "Meva va o'simlik nomlari",
+                    "Har qanday qo'shma otlar",
+                    "Sifatlovchi aniqlovchisi bor so'zlar"
+                ],
+                explain: "O'zbek tili imlosida juft (ota-ona) va takroriy so'zlar (asta-sekin) har doim defis bilan yozilishi shart.",
+                cat: "imlo"
+            },
+            {
+                id: 84,
+                q: "Xodimning ma'lumot darajasi, mutaxassisligi va mehnat faoliyati to'g'risidagi asosiy ma'lumotlar qaysi hujjatda to'liq aks etadi?",
+                answer: "Ma'lumotnoma (kadrlar hisobga olish varaqasi)",
+                options: [
+                    "Ma'lumotnoma (kadrlar hisobga olish varaqasi)",
+                    "Tushuntirish xati",
+                    "Tavsifnoma",
+                    "Tavsiyanoma"
+                ],
+                explain: "Kadrlar bo'limi tomonidan to'ldiriladigan ma'lumotnoma (obyektivka) xodimning butun faoliyati va shaxsiy ma'lumotlarini qamrab oladi.",
+                cat: "hujjat"
+            },
+            {
+                id: 85,
+                q: "Hujjat matnida foydalaniladigan ilova materiallari borligi haqidagi qayd hujjatning qayerida aks etadi?",
+                answer: "Hujjat matnidan so'ng, imzodan oldin",
+                options: [
+                    "Hujjat matnidan so'ng, imzodan oldin",
+                    "Hujjatning eng yuqori burchagida",
+                    "Hujjat sarlavhasida",
+                    "Mansabdor shaxs imzosidan keyin"
+                ],
+                explain: "Ilova hujjatlar ro'yxati asosiy matn tugagandan so'ng va imzodan yuqorida alohida 'Ilova:' so'zi bilan ko'rsatiladi.",
+                cat: "hujjat"
+            },
+            {
+                id: 86,
+                q: "Ariza rasmiy blankada yoki oq qog'ozda yozilganda, uning yuqori o'ng burchagidagi qismida nimalar yoziladi?",
+                answer: "Ariza qaratilgan shaxs va ariza beruvchining ma'lumotlari",
+                options: [
+                    "Ariza qaratilgan shaxs va ariza beruvchining ma'lumotlari",
+                    "Faqat arizaning nomi (ARIZA)",
+                    "Arizaning yozilgan sanasi va imzo",
+                    "Muassasaning nomi va manzili"
+                ],
+                explain: "Arizaning 'bosh qismi' (tepa o'ng burchakda) kimga yo'llanayotganligi (mansabi, ismi) va kim tomonidan yozilayotganligini ko'rsatadi.",
+                cat: "hujjat"
+            },
+            {
+                id: 87,
+                q: "Quyidagi so'zlardan qaysi birida tutuq belgisi (') so'z ma'nosini farqlashga xizmat qiladi?",
+                answer: "sur'at (temp) - surat (rasm)",
+                options: [
+                    "sur'at (temp) - surat (rasm)",
+                    "she'r",
+                    "ma'rifat",
+                    "san'at"
+                ],
+                explain: "Tutuq belgisi 'sur'at' (tezlik) so'zida ma'noni 'surat' (tasvir) so'zidan ajratib, fonetik va semantik farq hosil qiladi.",
+                cat: "imlo"
+            },
+            {
+                id: 88,
+                q: "O'zbek adabiy tili me'yorlariga ko'ra, qaysi so'z qo'shib yozilishi shart?",
+                answer: "ko'ksulton",
+                options: ["ko'ksulton", "nim chorak", "hech qachon", "har bir"],
+                explain: "Meva, o'simlik va hayvon nomlari tarkibida rang yoki xususiyat bildiruvchi so'zlar bo'lsa (M: ko'ksulton olg'ori), ular qo'shib yoziladi.",
+                cat: "imlo"
+            },
+            {
+                id: 89,
+                q: "Hujjat nomlari yoki kitob sarlavhalaridan so'ng tinish belgilarining qo'llanilishi qanday tartibga ega?",
+                answer: "Sarlavhalardan so'ng nuqta qo'yilmaydi",
+                options: [
+                    "Sarlavhalardan so'ng nuqta qo'yilmaydi",
+                    "Sarlavhalardan so'ng doimo nuqta qo'yiladi",
+                    "Sarlavha oxirida nuqtali vergul bo'lishi shart",
+                    "Sarlavhalardan so'ng undov belgisi qo'yiladi"
+                ],
+                explain: "Imlo va hujjatchilik qoidalariga ko'ra, har qanday sarlavha va hujjat nomlaridan keyin nuqta belgisi qo'yilmaydi.",
+                cat: "imlo"
+            },
+            {
+                id: 90,
+                q: "Rasmiy-idoraviy uslubning eng asosiy leksik va sintaktik xususiyati nima?",
+                answer: "His-tuyg'ularsiz, xolis va standartlashgan iboralarning qo'llanilishi",
+                options: [
+                    "His-tuyg'ularsiz, xolis va standartlashgan iboralarning qo'llanilishi",
+                    "Badiiy bo'yoqdorlik va o'xshatishlar ko'pligi",
+                    "Sodda va qisqa gaplar, ko'p so'roq gaplarning mavjudligi",
+                    "Sheva va qoralamalarning keng ko'lamda ishlatilishi"
+                ],
+                explain: "Rasmiy-idoraviy til standart, tayyor qoliplarga va xolis mantiqqa tayanadi; unda emotsional yoki badiiy bo'yoqli so'zlar mutloq ishlatilmaydi.",
+                cat: "uslub"
+            },
+            {
+                id: 91,
+                q: "Tashkiliy boshqaruvda qabul qilingan qonun va qarorlarning ijrosini ta'minlashda qaysi nutq shakli ustuvor hisoblanadi?",
+                answer: "Buyruq (imperativ) ohangi va fe'llar",
+                options: [
+                    "Buyruq (imperativ) ohangi va fe'llar",
+                    "Tasvirlash va taqqoslash",
+                    "Savol-javob va munozara uslubi",
+                    "Ritorik so'roq gaplar"
+                ],
+                explain: "Rasmiy qaror va buyruqlarda har doim aniq vazifani yuklovchi majburiy fe'llar (buyuraman, qaror qiladi, ijro etilsin) ishlatiladi.",
+                cat: "uslub"
+            },
+            {
+                id: 92,
+                q: "Tashkilot va idoralarda hujjatlarni tayyorlash, qayd etish hamda ularni tizimli arxivlash fani nima deb ataladi?",
+                answer: "Ish yuritish (Hujjatchilik)",
+                options: ["Ish yuritish (Hujjatchilik)", "Leksikografiya", "Arxivshunoslik", "Uslubiyot"],
+                explain: "Idoralarda hujjatlar bilan ishlash, ularni yaratish va qonuniy rasmiylashtirish jarayoni 'Ish yuritish' (deloproizvodstvo) deb nomlanadi.",
+                cat: "hujjat"
+            },
+            {
+                id: 93,
+                q: "Shaxs vafotidan so'ng o'ziga tegishli mol-mulkni tasarruf etish bo'yicha qoldiradigan rasmiy hujjati nima deb ataladi?",
+                answer: "Vasiyatnoma",
+                options: ["Vasiyatnoma", "Ishonchnoma", "Tilxat", "Tavsiyanoma"],
+                explain: "Vasiyatnoma fuqaroning shaxsiy xohish-irodasi bayon etilgan va notarius tomonidan qonuniy tasdiqlangan shaxsiy huquqiy hujjatdir.",
+                cat: "hujjat"
+            },
+            {
+                id: 94,
+                q: "Qaysi so'z juftligida 'h' o'rniga 'x' qo'llanilishi so'z ma'nosini butunlay o'zgartirib yuboradi?",
+                answer: "hol (ahvol) - xol (badandagi qora nuqta)",
+                options: [
+                    "hol (ahvol) - xol (badandagi qora nuqta)",
+                    "xabar - habar",
+                    "baxt - baht",
+                    "shoh - shox"
+                ],
+                explain: "'Hol' va 'xol' so'zlari imloda bir tovush bilan farqlanib, tubdan bo'lak ma'nolarni anglatadi, bu so'zlarni chalkashtirmaslik o'ta muhim.",
+                cat: "imlo"
+            },
+            {
+                id: 95,
+                q: "O'zbek tili imlo qoidalariga muvofiq, qaysi so'z qo'shib yozilishi lozim?",
+                answer: "boshboshdoqlik",
+                options: ["boshboshdoqlik", "har bir", "hech qachon", "dam olish"],
+                explain: "Tarkibiy qismlari fonetik va semantik jihatdan to'liq birikib ketgan qo'shma so'zlar (M: boshboshdoqlik, ko'priksozlik) qo'shib yoziladi.",
+                cat: "imlo"
+            },
+            {
+                id: 96,
+                q: "Keng jamoatchilikni biron tadbir yoki xabar bilan tanishtirish uchun tayyorlanadigan axborot hujjati nima?",
+                answer: "E'lon",
+                options: ["E'lon", "Ma'lumotnoma", "Ariza", "Hisobot"],
+                explain: "E'lon - keng ommani, jamoani ma'lum yangilik, tadbir yoki qarordan xabardor qilish uchun yoziladigan va ko'rinadigan joyga osiladigan ochiq hujjatdir.",
+                cat: "hujjat"
+            },
+            {
+                id: 97,
+                q: "Hujjatlarda rasmiy 'Imzo' rekviziti o'z ichiga nimalarni qamrab olishi kerak?",
+                answer: "Lavozim nomi, shaxsiy imzo, familiya va ism bosh harfi",
+                options: [
+                    "Lavozim nomi, shaxsiy imzo, familiya va ism bosh harfi",
+                    "Faqat shaxsiy grafik imzo chizig'i",
+                    "Faqat familiya va ism",
+                    "Muassasaning muhri va sana"
+                ],
+                explain: "Rasmiy imzoda imzo qo'yuvchi mansabdor shaxsning lavozimi (M: Bosh hisobchi), shaxsiy grafik imzosi hamda familiyasi va ismi yozilishi shart.",
+                cat: "hujjat"
+            },
+            {
+                id: 98,
+                q: "Quyidagi so'zlardan qaysi birida tovush tushishi (qisqarish) hodisasi yuz bergan?",
+                answer: "sarg'aymoq (sariq+ay)",
+                options: ["sarg'aymoq (sariq+ay)", "yaxshiroq", "dalada", "bolalar"],
+                explain: "'Sariq' so'ziga fe'l yasovchi '-ay' qo'shimchasi qo'shilganda asosdagi oxirgi unli (i) tushib ketgan: sariq -> sarg'aymoq.",
+                cat: "imlo"
+            },
+            {
+                id: 99,
+                q: "Agar 'Ishonchnoma' (Doverennost) tarkibida uning amal qilish muddati ko'rsatilmagan bo'lsa, qonunan u qancha muddat o'z kuchini saqlaydi?",
+                answer: "1 yil davomida",
+                options: ["1 yil davomida", "3 yil davomida", "6 oy davomida", "O'z kuchini yo'qotgan (haqiqiy emas) deb topiladi"],
+                explain: "Fuqarolik kodeksiga binoan, ishonchnomada amal qilish muddati yozilmagan bo'lsa, u imzolangan kundan boshlab bir yil davomida haqiqiy hisoblanadi.",
+                cat: "hujjat"
+            },
+            {
+                id: 100,
+                q: "Gapda muallif gapi va ko'chirma gaplarni ajratib ko'rsatishda qaysi tinish belgilaridan foydalaniladi?",
+                answer: "Ikki nuqta va qo'shtirnoq",
+                options: [
+                    "Ikki nuqta va qo'shtirnoq",
+                    "Nuqtali vergul va qavs",
+                    "So'roq va undov belgilari",
+                    "Ko'p nuqta va chiziqcha"
+                ],
+                explain: "Ko'chirma gapli gaplarda muallif gapidan keyin ikki nuqta, ko'chirma gap boshida va oxirida esa qo'shtirnoq belgilari qo'yiladi.",
                 cat: "imlo"
             }
         ];
@@ -1313,7 +1810,7 @@
         // Finish exam prompt inside modal dialog
         function finishExamPrompt() {
             const answeredCount = Object.keys(examAnswers).length;
-            const confirmed = confirm(`Jami 51 ta savoldan ${answeredCount} tasiga javob berdingiz. Imtihonni topshirishni tasdiqlaysizmi?`);
+            const confirmed = confirm(`Jami 100 ta savoldan ${answeredCount} tasiga javob berdingiz. Imtihonni topshirishni tasdiqlaysizmi?`);
             if (confirmed) {
                 finishExam();
             }
